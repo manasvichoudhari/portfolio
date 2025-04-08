@@ -1,11 +1,12 @@
 import React from "react";
-import NavBar from "./Components/Navbar/Navbar";
+import NavBar from "./Components/NavBar/Navbar";
 import Home from "./Components/Home/Home";
 import About from "./Components/About/About";
 import Projects from "./Components/projects/Projects";
 import Resume from "./Components/Resume";
 import Footer from "./Components/Footer/Footer";
-import Contact from "./Components/Contact";import '@fontsource/open-sans';
+import Contact from "./Components/Contact";
+import '@fontsource/open-sans';
 import '@fontsource/roboto';
 import '@fontsource/pacifico'
 import '@fontsource/montserrat';
@@ -20,6 +21,7 @@ const App = () => {
     <div className="bg-gradient-to-t" style={{ fontFamily: "Roboto, sans-serif",  }} >
    
       <NavBar />
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/About" element={<About />} />

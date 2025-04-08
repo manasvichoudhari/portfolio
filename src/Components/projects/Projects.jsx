@@ -1,42 +1,45 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
-import "aos/dist/aos.css"; 
+import "aos/dist/aos.css";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import loura from "../../assests/loura.png";
-import calc from "../../assests/calculator.png";
-import ama from "../../assests/amazon.png";
-import net from "../../assests/netflix2.png";
+import loura from "../../assets/loura.png";
+import calc from "../../assets/calculator.png";
+import ama from "../../assets/amazon.png";
+import net from "../../assets/netflix2.png";
 
-
-
- const projects = [
+// Project data
+const projects = [
   {
-    title: "Netflix clone",
-    description: "Built a Netflix clone app that allows users to browse, search, and watch movies and TV shows. Implemented features such as user authentication with Firebase, dynamic content rendering, and a custom video player",
+    title: "Netflix Clone",
+    description:
+      "Developed a Netflix-inspired streaming platform with user authentication via Firebase, dynamic content rendering, and a custom video player for an immersive experience.",
     technologies: ["HTML", "CSS"],
-    image: net, 
+    image: net,
     demoLink: "https://fascinating-muffin-7513dc.netlify.app/",
     githubLink: "https://github.com/manasvichoudhari/netflixmanasvi",
   },
   {
     title: "Amazon Clone",
-    description: "Designed and developed an Amazon-inspired e-commerce platform with an emphasis on intuitive user experience. Integrated features like dynamic product display, real-time search, and a responsive mobile-first design.",
-    technologies: ["HTML", "CSS", ],
-    image: ama, 
+    description:
+      "Built an e-commerce platform inspired by Amazon, featuring dynamic product displays, real-time search, and a mobile-first responsive design for seamless shopping.",
+    technologies: ["HTML", "CSS"],
+    image: ama,
     demoLink: "https://demo.com",
     githubLink: "https://github.com/manasvichoudhari/amazonclone",
   },
   {
     title: "Loura Portfolio",
-    description: "Created a personal portfolio website to display my web development projects. The site showcases my skills in HTML, TalwindCSS, and JavaScript, featuring responsive design and modern web practices.",
+    description:
+      "Designed a personal portfolio showcasing my web development skills, featuring Tailwind CSS, responsive layouts, and modern design principles.",
     technologies: ["HTML", "Tailwind CSS"],
-    image: loura, 
+    image: loura,
     demoLink: "https://manulora-clone.netlify.app/",
     githubLink: "https://github.com/manasvichoudhari/Loura-clone",
   },
   {
     title: "Calculator",
-    description: "This is a simple yet functional Calculator app built using HTML, CSS, and JavaScript. The project demonstrates my ability to create interactive, user-friendly applications with basic front-end technologies.",
+    description:
+      "Created a functional calculator app with a clean interface, demonstrating proficiency in interactive front-end development using JavaScript.",
     technologies: ["HTML", "CSS", "JavaScript"],
     image: calc,
     demoLink: "https://manu-calculator.netlify.app/",
@@ -44,80 +47,88 @@ import net from "../../assests/netflix2.png";
   },
 ];
 
+// Project Card Component
+const ProjectCard = ({ title, description, technologies, image, demoLink, githubLink }) => (
+  <div
+    className="group relative max-w-[400px] w-full mx-auto rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500"
+    data-aos="fade-up"
+  >
+    <img
+      src={image}
+      alt={`${title} screenshot`}
+      className="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105"
+      loading="lazy"
+    />
+    <div className="p-6 space-y-4">
+      <h3 className="text-2xl font-semibold text-white font-sans">{title}</h3>
+      <p className="text-gray-300 font-sans text-sm leading-relaxed">{description}</p>
+      <div className="flex flex-wrap gap-2">
+        {technologies.map((tech, idx) => (
+          <span
+            key={idx}
+            className="bg-indigo-600 text-white text-xs font-sans font-medium rounded-full px-3 py-1"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+      <div className="flex justify-between items-center pt-2">
+        <a
+          href={githubLink}
+          className="text-indigo-400 hover:text-indigo-300 transition-colors duration-300"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`View ${title} on GitHub`}
+        >
+          <FaGithub size={20} />
+        </a>
+        <a
+          href={demoLink}
+          className="text-indigo-400 hover:text-indigo-300 transition-colors duration-300"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`View live demo of ${title}`}
+        >
+          <FaExternalLinkAlt size={20} />
+        </a>
+      </div>
+    </div>
+  </div>
+);
+
 const Projects = () => {
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Duration of the animation
+      duration: 800,
+      once: true,
+      easing: "ease-in-out",
     });
   }, []);
 
   return (
     <section
-    id="projects"
-    className="py-20 bg-gradient-to-r from-slate-800 via-slate-700 to-gray-900"
-  >
-    <div className="container mx-auto px-6 md:px-12">
-      <div className="text-center mb-12" data-aos="fade-up">
-        <h2 className="text-5xl font-bold text-white mb-4">My Projects</h2>
-        <p className="text-lg text-gray-300 opacity-80">
-          Here are some of the projects I've worked on
-        </p>
+      id="projects"
+      className="py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-slate-700 text-white"
+    >
+      <div className="container mx-auto px-6 md:px-12 lg:px-16">
+        {/* Header */}
+        <div className="text-center mb-16" data-aos="fade-down">
+          <h2 className="text-4xl md:text-5xl font-sans font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
+            My Projects
+          </h2>
+          <p className="mt-4 text-lg text-gray-300 font-sans max-w-2xl mx-auto">
+            A showcase of my work in web development, blending creativity and technical expertise.
+          </p>
+        </div>
+
+        {/* Grid */}
+        <div className="grid justify-center sm:justify-start grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {projects.map((project, index) => (
+            <ProjectCard key={index} {...project} />
+          ))}
+        </div>
       </div>
-  
-      {/* Grid layout with responsive design */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-12">
-        {projects.map((project, index) => (
-          <div
-            key={index}
-            className="relative group bg-gray-800 rounded-lg shadow-xl overflow-hidden transition-transform duration-500 hover:scale-105"
-            data-aos="zoom-in"
-            data-aos-delay={index * 200}
-          >
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-64 object-cover transition-all duration-300 group-hover:scale-110"
-            />
-            <div className="p-6">
-              <h3 className="text-2xl font-semibold text-white">
-                {project.title}
-              </h3>
-              <p className="text-gray-300 mt-2">{project.description}</p>
-              <div className="flex items-center mt-4">
-                {project.technologies.map((tech, idx) => (
-                  <span
-                    key={idx}
-                    className="text-sm bg-blue-600 text-white rounded-full px-3 py-1 mr-2 mb-2"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              <div className="mt-4 flex justify-between items-center">
-                <a
-                  href={project.githubLink}
-                  className="text-blue-400 hover:text-blue-500 transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaGithub size={24} />
-                </a>
-                <a
-                  href={project.demoLink}
-                  className="text-blue-400 hover:text-blue-500 transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaExternalLinkAlt size={24} />
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-  
+    </section>
   );
 };
 

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Worker, Viewer } from "@react-pdf-viewer/core";
-import "@react-pdf-viewer/core/lib/styles/index.css";
+import React, { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+const resumePreview = "/resume.pdf"; 
 
 const Resume = () => {
   const [showResume, setShowResume] = useState(false);
@@ -9,31 +10,61 @@ const Resume = () => {
     setShowResume(!showResume);
   };
 
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: "ease-in-out",
+    });
+  }, []);
+
   return (
-    <section className="bg-gradient-to-r from-gray-800 via-gray-900 to-black py-20">
-      <div className="container mx-auto px-6 md:px-12 text-white">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-indigo-400">My Resume</h2>
-          <p className="text-lg text-gray-300 mt-4">
-            Highlighting my journey through academic and personal projects in my resume. Open to feedback and opportunities.
+    <section className="py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
+      <div className="container mx-auto px-6 md:px-12 lg:px-16">
+        {/* Header */}
+        <div className="text-center mb-16" data-aos="fade-down">
+          <h2 className="text-4xl md:text-5xl font-sans font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
+            My Resume
+          </h2>
+          <p className="mt-4 text-lg text-gray-300 font-sans max-w-2xl mx-auto leading-relaxed">
+            A snapshot of my academic achievements, technical skills, and project experience. I’m always open to feedback and opportunities!
           </p>
         </div>
 
-        <div className="text-center mt-12 mb-12">
+        {/* Button */}
+        <div className="text-center mb-12" data-aos="fade-up">
           <button
             onClick={handleResumeToggle}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 text-xl rounded-full transition-all duration-300 ease-in-out"
+            aria-expanded={showResume}
+            aria-controls="resume-preview"
+            className="px-8 py-3 bg-indigo-600 text-white font-sans font-semibold text-lg rounded-full shadow-md hover:bg-indigo-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50 transition-all duration-300 transform hover:scale-105"
           >
-            {showResume ? "Close Resume" : "View My Resume"}
+            {showResume ? "Close Resume" : "View Resume"}
           </button>
         </div>
 
+        {/* Resume Display with Preview Image */}
         {showResume && (
-          <div className="flex justify-center mt-12">
-            <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
-            <Viewer fileUrl="/resume.pdf" />
-</Worker>
-
+          <div
+            className="mt-12 max-w-4xl mx-auto"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <img
+              src={resumePreview} // Your resume image
+              alt="Manasvi Choudhari's Resume Preview"
+              className="w-full rounded-xl shadow-lg border-4 border-indigo-500/30"
+              loading="lazy"
+            />
+            <div className="mt-6 text-center">
+              <a
+                href="/resume.pdf" // Your resume PDF path
+                download="Manasvi_Choudhari_Resume.pdf"
+                className="inline-block px-6 py-2 bg-transparent border-2 border-indigo-400 text-indigo-400 font-sans font-medium rounded-full hover:bg-indigo-400 hover:text-white transition-all duration-300"
+              >
+                Download PDF
+              </a>
+            </div>
           </div>
         )}
       </div>
